@@ -3,3 +3,7 @@
 09/22/2026-03:49:29.437256  [Drop] [**] [1:1000002:1] MQPILOT Malicious Payload Dropped [**] [Classification: Potentially Bad Traffic] [Priority: 2] {TCP} 172.20.0.4:51139 -> 172.20.0.5:1883
 09/22/2026-03:50:28.091590  [Drop] [**] [1:1000002:1] MQPILOT Malicious Payload Dropped [**] [Classification: Potentially Bad Traffic] [Priority: 2] {TCP} 172.20.0.4:44697 -> 172.20.0.5:1883
 09/22/2026-04:01:17.460586  [**] [1:1000001:1] MQPILOT Suspicious MQTT rate [**] [Classification: Attempted Denial of Service] [Priority: 2] {TCP} 172.20.0.4:58219 -> 172.20.0.5:1883
+09/22/2026-04:02:57.530039  [**] [1:1000001:1] MQPILOT Suspicious MQTT rate [**] [Classification: Attempted Denial of Service] [Priority: 2] {TCP} 172.20.0.4:40237 -> 172.20.0.5:1883
+09/22/2026-04:03:52.657780  [**] [1:1000001:1] MQPILOT Suspicious MQTT rate [**] [Classification: Attempted Denial of Service] [Priority: 2] {TCP} 172.20.0.4:56305 -> 172.20.0.5:1883
+09/22/2026-04:04:32.215022  [Drop] [**] [1:1000002:1] MQPILOT Malicious Payload Dropped [**] [Classification: Potentially Bad Traffic] [Priority: 2] {TCP} 172.20.0.4:37109 -> 172.20.0.5:1883
+09/22/2026-04:05:10.720059  [Drop] [**] [1:1000002:1] MQPILOT Malicious Payload Dropped [**] [Classification: Potentially Bad Traffic] [Priority: 2] {TCP} 172.20.0.4:33547 -> 172.20.0.5:1883

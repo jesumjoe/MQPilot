@@ -43,10 +43,10 @@ def run_attack(scenario):
         elif scenario == "correlated":
             # Scenario 7 - Combined
             print("Flooding AND sending signatures...")
-            for i in range(100):
+            for i in range(300):
                 payload = "C2_BEACON" if i % 10 == 0 else "value:99"
                 client.publish(random.choice(TOPICS), payload)
-                time.sleep(0.05)
+                time.sleep(0.01)
                 
         else:
             print("Unknown scenario. Use: signature, rate, topic, correlated")

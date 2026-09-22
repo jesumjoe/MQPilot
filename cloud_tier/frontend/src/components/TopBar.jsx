@@ -24,6 +24,7 @@ export default function TopBar({ connected, lastUpdated }) {
         <div className="topbar__shield">🛡️</div>
         <div className="topbar__titles">
           <span className="topbar__title">MQPilot</span>
+          <span className="text-xs text-orange-400 font-bold uppercase tracking-wider">⚠️ Simulated Demo Data Layer</span>
           <span className="topbar__subtitle">Real-time Device Trust &amp; Containment Dashboard</span>
         </div>
       </div>

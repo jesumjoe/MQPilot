@@ -1,4 +1,4 @@
-﻿import time
+import time
 import random
 from flask import Flask, jsonify
 
@@ -48,19 +48,19 @@ ALERT_TEMPLATES = {
         "Unusual MQTT connection frequency from {ip} -- monitoring escalated",
     ],
     "Suspicious": [
-        "[Suricata] ET SCAN Brute-Force attempt on {ip}:1883",
-        "MQTT payload injection attempt on topic {topic} from {ip}",
-        "Isolation Forest: anomaly score 0.73 flagged for {name}",
+        "[SIMULATED] Brute-Force attempt on {ip}:1883",
+        "[SIMULATED] MQTT payload injection attempt on topic {topic} from {ip}",
+        "[SIMULATED] Anomaly score 0.73 flagged for {name}",
     ],
     "Contained": [
-        "[Containment] Device {name} quarantined -- NFQUEUE blocking {ip}",
-        "[IPTables] DROP rule applied: {ip} port 1883",
-        "Isolation Forest: HIGH anomaly score (0.91) sustained -- {name}",
+        "[SIMULATED] Device {name} quarantined -- blocking {ip}",
+        "[SIMULATED] DROP rule applied: {ip} port 1883",
+        "[SIMULATED] HIGH anomaly score (0.91) sustained -- {name}",
     ],
     "Critical": [
-        "[CRITICAL] C2 beacon pattern detected from {ip} on {topic}",
-        "[CRITICAL] Data exfiltration volume spike -- {name} ({topic})",
-        "[CRITICAL] Device {name} fully compromised -- manual intervention required",
+        "[SIMULATED] C2 beacon pattern detected from {ip} on {topic}",
+        "[SIMULATED] Data exfiltration volume spike -- {name} ({topic})",
+        "[SIMULATED] Device {name} fully compromised -- manual intervention required",
     ],
 }
 
