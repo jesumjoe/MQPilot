@@ -11,6 +11,7 @@ services:
       - iot_lan
     volumes:
       - ./edge_sensor:/edge_sensor
+      - ./Data/PCAP:/pcaps
 
   iot_broker:
     image: eclipse-mosquitto:latest
@@ -22,15 +23,6 @@ services:
     volumes:
       - ./iot_broker/mosquitto.conf:/mosquitto/config/mosquitto.conf
 
-  traffic_gen:
-    image: python:3.11-slim
-    container_name: traffic_gen
-    networks:
-      - iot_lan
-    volumes:
-      - ./traffic_gen:/traffic_gen
-    command: /bin/bash -c "pip install paho-mqtt && python /traffic_gen/generate_baseline.py"
-
   cloud_tier:
     image: python:3.11-slim
     container_name: cloud_tier
@@ -40,6 +32,7 @@ services:
       - iot_lan
     volumes:
       - ./cloud_tier/api:/cloud_tier/api
+      - ./edge_sensor/logs:/edge_sensor/logs
     working_dir: /cloud_tier/api
     command: /bin/bash -c "pip install flask && python -m flask run --host=0.0.0.0"
 
