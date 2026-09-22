@@ -1,0 +1,29 @@
+# MQPilot Suricata Custom Rules
+# These rules test specific conditions expected in the simulation.
+
+# 1. Detect unusual publish rate (possible DoS or brute force)
+# What it detects: More than 50 messages from a single IP to port 1883 in 5 seconds.
+# Why it exists: Protect against MQTT DoS.
+# How to test: Rapidly publish to the broker using a script.
+alert tcp any any -> any 1883 (msg:"MQPILOT Suspicious MQTT rate"; flow:to_server,established; threshold:type both, track by_src, count 50, seconds 5; sid:1000001; rev:1; classtype:attempted-dos;)
+
+# 2. Blocking Rule: Known Malicious Indicator
+# What it detects: A specific malicious payload string "C2_BEACON"
+# Why it exists: To demonstrate IPS functionality and drop packets with malicious contents.
+# How to test: Publish a message with "C2_BEACON" as payload.
+drop tcp any any -> any 1883 (msg:"MQPILOT Malicious Payload Dropped"; flow:established,to_server; content:"C2_BEACON"; nocase; sid:1000002; rev:1; classtype:bad-unknown;)
+
+# 3. Unauthorized Topic Access (Simulated)
+# What it detects: Access to a sensitive topic 'admin/config'
+# Why it exists: Detect unauthorized administrative topics.
+# How to test: Subscribe or publish to 'admin/config'.
+alert tcp any any -> any 1883 (msg:"MQPILOT Unauthorized Topic Access"; flow:established,to_server; content:"admin/config"; sid:1000003; rev:1;)
+
+# 4. Hydra Brute Force Default Behavior
+# What it detects: Hydra MQTT brute-force patterns or default hydra strings if any
+# Why it exists: Kali container simulates brute-force.
+alert tcp any any -> any 1883 (msg:"MQPILOT Potential Hydra Bruteforce"; flow:established,to_server; content:"hydra"; nocase; sid:1000004; rev:1;)
+
+# 5. Invalid MQTT protocol identifier
+# What it detects: Traffic to port 1883 that does not use MQTT properly
+alert tcp any any -> any 1883 (msg:"MQPILOT Malformed MQTT Protocol"; flow:established,to_server; app-layer-protocol:!mqtt; sid:1000005; rev:1;)

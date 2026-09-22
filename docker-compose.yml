@@ -1,8 +1,8 @@
+name: mqpilot
 version: '3.8'
-
 services:
   edge_sensor:
-    image: ubuntu:22.04
+    build: ./edge_sensor
     container_name: edge_sensor
     cap_add:
       - NET_ADMIN
@@ -11,7 +11,6 @@ services:
       - iot_lan
     volumes:
       - ./edge_sensor:/edge_sensor
-    command: /bin/bash -c "apt update && apt install -y suricata iptables python3 python3-pip && bash /edge_sensor/setup_edge.sh && tail -f /dev/null"
 
   iot_broker:
     image: eclipse-mosquitto:latest
@@ -39,7 +38,10 @@ services:
       - "5000:5000"
     networks:
       - iot_lan
-    command: /bin/bash -c "tail -f /dev/null" # Placeholder for your Flask/React App
+    volumes:
+      - ./cloud_tier/api:/cloud_tier/api
+    working_dir: /cloud_tier/api
+    command: /bin/bash -c "pip install flask && python -m flask run --host=0.0.0.0"
 
   attacker_kali:
     image: kalilinux/kali-rolling

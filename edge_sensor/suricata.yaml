@@ -1,0 +1,58 @@
+%YAML 1.1
+---
+vars:
+  address-groups:
+    HOME_NET: "[172.16.0.0/12]"
+    EXTERNAL_NET: "!$HOME_NET"
+  port-groups:
+    HTTP_PORTS: "80"
+    SHELLCODE_PORTS: "!80"
+    ORACLE_PORTS: 1521
+    SSH_PORTS: 22
+    DNP3_PORTS: 20000
+    MODBUS_PORTS: 502
+    FILEINFO_PORTS: "any"
+    FTP_PORTS: 21
+
+default-log-dir: /edge_sensor/logs
+
+outputs:
+  - fast:
+      enabled: yes
+      filename: fast.log
+      append: yes
+
+  - eve-log:
+      enabled: yes
+      filetype: regular
+      filename: eve.json
+      types:
+        - alert:
+            payload: yes
+            payload-buffer-size: 4kb
+            payload-printable: yes
+            packet: yes
+        - drop:
+            alerts: yes
+        - flow
+        - mqtt
+        - stats:
+            totals: yes
+            threads: no
+
+nfq:
+  mode: accept
+  repeat-mark: 1
+  repeat-mask: 1
+  bypass-mark: 1
+  bypass-mask: 1
+  fail-open: yes
+
+app-layer:
+  protocols:
+    mqtt:
+      enabled: yes
+
+default-rule-path: /edge_sensor/rules
+rule-files:
+  - mqpilot.rules

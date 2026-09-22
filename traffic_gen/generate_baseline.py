@@ -2,7 +2,7 @@ import paho.mqtt.client as mqtt
 import time
 import random
 
-BROKER = "iot_broker"
+BROKER = "edge_sensor"
 PORT = 1883
 TOPICS = ["sensor/temperature", "sensor/humidity", "device/status"]
 
